@@ -1,10 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Gallery from "./components/Gallery/Gallery";
+import ModalWIndow from "./components/ModalWindow/ModalWIndow";
 
 function App() {
+  const [openModal, setOpenModal] = React.useState(false);
+
   return (
     <div>
-      <h1>Hello world!</h1>
+      <Header />
+      <Gallery setActive={() => setOpenModal(true)} />
+      {openModal && <ModalWIndow onClose={() => setOpenModal(false)} />}
+      <Footer />
     </div>
   );
 }
