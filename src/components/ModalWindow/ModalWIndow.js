@@ -14,12 +14,8 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 0px 0px;
-  width: 1000px;
-  height: 600px;
+  max-width: 1000px;
+  
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -27,14 +23,19 @@ const Container = styled.div`
   margin-right: -50%;
   transform: translate(-50%, -50%);
   padding: 40px;
+  img {
+    max-height: 350px;
+    width: 100%;
+    object-fit: cover;
+  }
 `;
 
 const Comment = styled.div`
   padding: 10px 30px;
-  p:first-child{
-    color: #C0C0C0;
+  p:first-child {
+    color: #c0c0c0;
     margin-bottom: 5px;
-  } 
+  }
 `;
 
 function ModalWIndow(props) {
@@ -50,17 +51,34 @@ function ModalWIndow(props) {
 
   return (
     <Overlay onClick={props.onClose}>
-      <Container onClick={e => e.stopPropagation()}>
-        <img height={350} src={imageUrl} alt="" />
-        <Comment>
-          <p>18.12.19</p>
-          <p>Отличное фото</p>
-        </Comment>
+      <Container className="container" onClick={(e) => e.stopPropagation()}>
+        <div className="row">
+          <div className="col col-md-6 col-12">
+            <img src={imageUrl} alt="" />
+          </div>
+          <Comment className="col">
+            <p>18.12.19</p>
+            <p>Отличное фото</p>
+          </Comment>
+        </div>
         <Form>
-          <Form.Control className="mb-4 mt-4" type="text" placeholder="Ваше имя" />
-          <Form.Control className="mb-4" type="text" placeholder="Ваш комментарий" />
+          <Form.Control
+            className="mb-4 mt-4"
+            type="text"
+            placeholder="Ваше имя"
+          />
+          <Form.Control
+            className="mb-4"
+            type="text"
+            placeholder="Ваш комментарий"
+          />
           <div className="d-grid gap-2">
-          <Button className="d-grid gap-2" as="input" type="button" value="Оставить комментарий" />{" "}
+            <Button
+              className="d-grid gap-2"
+              as="input"
+              type="button"
+              value="Оставить комментарий"
+            />{" "}
           </div>
         </Form>
       </Container>
