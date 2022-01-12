@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Line = styled.div`
   border: 1px solid #C0C0C0;
@@ -14,20 +13,10 @@ text-align: center;
 `;
 
 const FooterDiv = styled.div`
-position: absolute;
-  
+  position: absolute; 
   bottom: 0;
   width: 100%;
   height: 60px;
 `;
 
-function Footer() {
-  return (
-    <FooterDiv>
-      <Line></Line>
-      <FooterText>© 2021</FooterText>
-    </FooterDiv>
-  );
-}
-
-export default Footer;
+export { Line, FooterText, FooterDiv };
