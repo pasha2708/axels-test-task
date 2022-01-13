@@ -1,25 +1,17 @@
 import React from 'react';
-import { Footer, Header, ModalWIndow, Gallery } from './components';
+import { Footer, Header, Gallery } from './components';
 import GlobalStyle from './styled/globalStyle';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link, Routes
-} from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom/cjs/react-router-dom.min';
 
 const App = () => {
-
-  const [idModal, setIdModal] = React.useState('')
-  
+ 
   return (
     <div>
       <Router>
         <GlobalStyle />
         <Header />
-        <Gallery idModal={(id) => setIdModal(id) } />
-        
+        <Gallery />
         <Footer />
       </Router>
     </div>

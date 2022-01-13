@@ -7,12 +7,7 @@ import {
   ButtonClose,
 } from '../styled/components/ModalWIndow';
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ModalWIndow = (props) => {
   const [imageUrl, setImageUrl] = React.useState('');

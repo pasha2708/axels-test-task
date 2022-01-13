@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Switch, Route, Link } from 'react-router-dom';
 import { ModalWIndow } from '../components';
 
-const Gallery = (props) => {
+const Gallery = () => {
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
@@ -25,7 +25,6 @@ const Gallery = (props) => {
             {data.map((item) => (
               <>
               <Col key={item.id} style={{ marginBottom: "20px" }} md={6} lg={4}>
-                {/* <Link to="/modal"> */}
                 <Link to={`/${item.id}`}>
                   <img src={item.url} alt="preview" />
                 </Link>
