@@ -22,39 +22,39 @@ const ModalWIndow = (props) => {
 
   return (
     <Overlay>
-      <Container className='container'>
+      <Container className="container">
         <Link to="/" exact>
           <ButtonClose onClick={props.onClose}>
             <span>&times;</span>
           </ButtonClose>
         </Link>
-        <div className='row'>
-          <div className='col col-md-6 col-12'>
-            <img src={imageUrl} alt='' />
+        <div className="row">
+          <div className="col col-md-6 col-12">
+            <img src={imageUrl} alt="" />
           </div>
-          <Comment className='col'>
+          <Comment className="col">
             <p>18.12.19</p>
             <p>Отличное фото</p>
           </Comment>
         </div>
-        <Form className='col-6'>
+        <Form className="col-6">
           <Form.Control
-            className='mb-4 mt-4'
-            type='text'
-            placeholder='Ваше имя'
+            className="mb-4 mt-4"
+            type="text"
+            placeholder="Ваше имя"
           />
           <Form.Control
-            className='mb-4'
-            type='text'
-            placeholder='Ваш комментарий'
+            className="mb-4"
+            type="text"
+            placeholder="Ваш комментарий"
           />
-          <div className='d-grid gap-2'>
+          <div className="d-grid gap-2">
             <Button
-              className='d-grid gap-2'
-              as='input'
-              type='button'
-              value='Оставить комментарий'
-            />{' '}
+              className="d-grid gap-2"
+              as="input"
+              type="button"
+              value="Оставить комментарий"
+            />
           </div>
         </Form>
       </Container>
