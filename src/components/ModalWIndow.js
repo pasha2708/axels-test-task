@@ -13,6 +13,12 @@ const ModalWIndow = (props) => {
   const [imageUrl, setImageUrl] = React.useState('');
 
   React.useEffect(() => {
+
+    // let res = Request();
+    // console.log(res);
+    
+    
+    
     axios
       .get(`https://boiling-refuge-66454.herokuapp.com/images/${props.id}`)
       .then((res) => {

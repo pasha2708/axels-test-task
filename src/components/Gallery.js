@@ -2,19 +2,17 @@ import React from 'react';
 import { Col, Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Substrate from '../styled/components/Gallery';
-import axios from 'axios';
+// import axios from 'axios';
 import { Switch, Route, Link } from 'react-router-dom';
 import { ModalWIndow } from '../components';
+import { useDispatch } from 'react-redux';
+import * as actions from "../store/actions";
 
-const Gallery = () => {
-  const [data, setData] = React.useState([]);
-
+const Gallery = ({ data }) => {
+  const dispatch = useDispatch();
+  
   React.useEffect(() => {
-    axios
-      .get('https://boiling-refuge-66454.herokuapp.com/images')
-      .then((res) => {
-        setData(res.data);
-      });
+    dispatch(actions.getPreview()); 
   }, []);
 
   return (
