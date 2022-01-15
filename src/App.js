@@ -1,18 +1,25 @@
 import React from 'react';
-import { Footer, Header, ModalWIndow, Gallery } from './components';
+import { Footer, Header, Gallery } from './components';
 import GlobalStyle from './styled/globalStyle';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router } from 'react-router-dom/cjs/react-router-dom.min';
+import { useSelector } from 'react-redux';
+
+
 
 const App = () => {
-  const [openModal, setOpenModal] = React.useState(false);
+ 
+  const data = useSelector(state => state);
+  console.log(data);
 
   return (
     <div>
-      <GlobalStyle />
-      <Header />
-      <Gallery setActive={() => setOpenModal(true)} />
-      {openModal && <ModalWIndow onClose={() => setOpenModal(false)} />}
-      <Footer />
+      <Router>
+        <GlobalStyle />
+        <Header />
+        <Gallery data={ data } />
+        <Footer />
+      </Router>
     </div>
   );
 }

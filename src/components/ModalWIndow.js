@@ -1,14 +1,20 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { Overlay, Container, Comment, ButtonClose } from '../styled/components/ModalWIndow';
+import {
+  Overlay,
+  Container,
+  Comment,
+  ButtonClose,
+} from '../styled/components/ModalWIndow';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const ModalWIndow = (props) => {
   const [imageUrl, setImageUrl] = React.useState('');
 
-  React.useEffect(() => {
+  React.useEffect(() => {   
     axios
-      .get('https://boiling-refuge-66454.herokuapp.com/images/238')
+      .get(`https://boiling-refuge-66454.herokuapp.com/images/${props.id}`)
       .then((res) => {
         setImageUrl(res.data.url);
       });
@@ -16,10 +22,12 @@ const ModalWIndow = (props) => {
 
   return (
     <Overlay>
-      <Container className='container'>
-        <ButtonClose onClick={props.onClose}>
-          <span>&times;</span>
-        </ButtonClose>
+      <Container className="container">
+        <Link to="/" exact>
+          <ButtonClose onClick={props.onClose}>
+            <span>&times;</span>
+          </ButtonClose>
+        </Link>
         <div className="row">
           <div className="col col-md-6 col-12">
             <img src={imageUrl} alt="" />
@@ -46,12 +54,12 @@ const ModalWIndow = (props) => {
               as="input"
               type="button"
               value="Оставить комментарий"
-            />{" "}
+            />
           </div>
         </Form>
       </Container>
     </Overlay>
   );
-}
+};
 
 export default ModalWIndow;
