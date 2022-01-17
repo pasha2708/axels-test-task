@@ -6,7 +6,7 @@ const Line = styled.div`
 `;
 
 const FooterText = styled.div`
-text-align: center;
+  text-align: center;
   color: #C0C0C0;
   margin-top: 20px;
   
