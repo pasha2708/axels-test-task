@@ -27,7 +27,14 @@ const Container = styled.div`
   }
 `;
 
+const CommentList = styled.div`
+  /* display: flex; */
+`
+
 const Comment = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: start;
   padding: 10px 30px;
   p:first-child {
     color: ${primaryGray};
@@ -49,4 +56,4 @@ const ButtonClose = styled.div`
   }
 `;
 
-export { Overlay, Container, Comment, ButtonClose }
+export { Overlay, Container, Comment, ButtonClose, CommentList }

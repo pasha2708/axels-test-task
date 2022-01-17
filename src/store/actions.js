@@ -1,14 +1,17 @@
 import * as actions from './actionTypes';
 
 
-export const getPreview = () => ({
-  type: actions.GET_PREVIEW,
+export const recievePreview = (data) => ({
+  type: actions.RECIEVE_PREVIEW,
+  payload: { data }
 });
-export const getFullImage = id => ({
-  type: actions.GET_FULL_IMAGE,
-  payload: { id }
+
+export const recieveFullImg = (data) => ({
+  type: actions.RECIEVE_FULL_IMAGE,
+  payload: { data }
 });
-export const getComments = id => ({
-  type: actions.GET_COMMENTS,
-  payload: { id }
-})
+
+export const settingLoadingFalse = (data) => ({
+  type: actions.SETTING_LOADING_FALSE,
+  payload: { data }
+});

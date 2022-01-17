@@ -5,37 +5,46 @@ import {
   Container,
   Comment,
   ButtonClose,
+  CommentList
 } from '../styled/components/ModalWIndow';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { GET_FULL_IMAGE, SET_LOADED_FALSE } from '../store/actionTypes';
 
 const ModalWIndow = (props) => {
-  const [imageUrl, setImageUrl] = React.useState('');
 
+  let comments = props.data.fullImage.comments;
+
+  const dispatch = useDispatch();
   React.useEffect(() => {   
-    axios
-      .get(`https://boiling-refuge-66454.herokuapp.com/images/${props.id}`)
-      .then((res) => {
-        setImageUrl(res.data.url);
-      });
-  }, []);
+    dispatch({
+      type: GET_FULL_IMAGE,
+      payload: props.id
+      })
+  }, [dispatch]);
+
+  const dateFormat = (date) =>(
+   new Date(date).toLocaleDateString().split('/').join('.'))
 
   return (
     <Overlay>
       <Container className="container">
         <Link to="/" exact>
-          <ButtonClose onClick={props.onClose}>
+          <ButtonClose onClick={() => dispatch({type: SET_LOADED_FALSE})}>
             <span>&times;</span>
           </ButtonClose>
         </Link>
         <div className="row">
           <div className="col col-md-6 col-12">
-            <img src={imageUrl} alt="" />
+            {props.data.isLoaded && <img src={props.data.fullImage.url} alt="" />}
           </div>
-          <Comment className="col">
-            <p>18.12.19</p>
-            <p>Отличное фото</p>
-          </Comment>
+          <CommentList className='col-md-6 col-12'>
+            {comments && comments.map((item) =>(
+              <Comment key={item.id} className="col">
+                <p>{dateFormat(item.date)}</p>
+                <p>{item.text}</p>
+            </Comment>))}
+          </CommentList>          
         </div>
         <Form className="col-6">
           <Form.Control
