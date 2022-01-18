@@ -1,21 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
+
 import {
   Overlay,
   Container,
   Comment,
   ButtonClose,
-  CommentList
-} from '../styled/components/ModalWIndow';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { GET_FULL_IMAGE, SET_LOADED_FALSE } from '../store/actionTypes';
+} from '../styled/components/ModalWindow';
 
-const ModalWIndow = (props) => {
+import { GET_FULL_IMAGE, SET_LOADED_FALSE, SEND_COMMENT } from '../redux/ducks/gallery';
 
+const ModalWindow = (props) => {
   let comments = props.data.fullImage.comments;
-
   const dispatch = useDispatch();
+  
   React.useEffect(() => {   
     dispatch({
       type: GET_FULL_IMAGE,
@@ -23,8 +23,20 @@ const ModalWIndow = (props) => {
       })
   }, [dispatch]);
 
-  const dateFormat = (date) =>(
+  const dateFormat = (date) => (
    new Date(date).toLocaleDateString().split('/').join('.'))
+
+  const handleSubmit = (event) => {
+    dispatch({
+      type: SEND_COMMENT,
+      payload: {
+        id: props.data.fullImage.id,
+        comment: event.target.comment.value,
+        name: event.target.comment.value, 
+        date: new Date().getTime()
+      }
+    })
+   }
 
   return (
     <Overlay>
@@ -38,32 +50,34 @@ const ModalWIndow = (props) => {
           <div className="col col-md-6 col-12">
             {props.data.isLoaded && <img src={props.data.fullImage.url} alt="" />}
           </div>
-          <CommentList className='col-md-6 col-12'>
+          <div className='col-md-6 col-12'>
             {comments && comments.map((item) =>(
               <Comment key={item.id} className="col">
                 <p>{dateFormat(item.date)}</p>
                 <p>{item.text}</p>
             </Comment>))}
-          </CommentList>          
+          </div>          
         </div>
-        <Form className="col-6">
+        <Form className="col-6" onSubmit={handleSubmit}>
           <Form.Control
             className="mb-4 mt-4"
+            name="name"
             type="text"
             placeholder="Ваше имя"
           />
           <Form.Control
             className="mb-4"
+            name="comment"
             type="text"
             placeholder="Ваш комментарий"
           />
           <div className="d-grid gap-2">
-            <Button
-              className="d-grid gap-2"
-              as="input"
-              type="button"
-              value="Оставить комментарий"
-            />
+            <Button 
+              variant="primary" 
+              type="submit"
+            >
+              Оставить комментарий
+            </Button>
           </div>
         </Form>
       </Container>
@@ -71,4 +85,4 @@ const ModalWIndow = (props) => {
   );
 };
 
-export default ModalWIndow;
+export default ModalWindow;

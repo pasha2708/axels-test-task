@@ -1,45 +1,40 @@
 import React from 'react';
-import { Col, Container } from 'react-bootstrap';
-import Row from 'react-bootstrap/Row';
-import Substrate from '../styled/components/Gallery';
 import { Switch, Route, Link } from 'react-router-dom';
-import { ModalWIndow } from '../components';
 import { useDispatch } from 'react-redux';
-import { GET_PREVIEW } from '../store/actionTypes';
+import Row from 'react-bootstrap/Row';
+
+import { ModalWindow } from '../components';
+import { StyledCol, StyledContainer } from '../styled/components/Gallery';
+
+import { GET_PREVIEW } from '../redux/ducks/gallery';
 
 const Gallery = ({ data }) => {
-
   const dispatch = useDispatch();
-  
   React.useEffect(() => {
-    dispatch({type: GET_PREVIEW})
+    dispatch({ type: GET_PREVIEW });
   }, [dispatch]);
   
   return (
-    <div>
-      <Container>
-        <Substrate>
-          <Row>
-            {data.images && data.images.map((item) => (
-              <>
-              <Col key={item.id} style={{ marginBottom: "20px" }} md={6} lg={4}>
+    <StyledContainer>
+      <Row>
+        {data.images &&
+          data.images.map((item) => (
+            <>
+              <StyledCol key={item.id} md={6} lg={4}>
                 <Link to={`/images/${item.id}`}>
-                  <img src={item.url} alt="preview" />
+                  <img src={item.url} alt='preview' />
                 </Link>
-              </Col>
+              </StyledCol>
               <Switch>
-              <Route path={`/images/${item.id}`}>
-                <ModalWIndow id={item.id} data={data} />
-              </Route>
-            </Switch>
+                <Route path={`/images/${item.id}`}>
+                  <ModalWindow id={item.id} data={data} />
+                </Route>
+              </Switch>
             </>
-            ))}
-          </Row>
-          
-        </Substrate>
-      </Container>
-    </div>
+          ))}
+      </Row>
+    </StyledContainer>
   );
-}
+};
 
 export default Gallery;
