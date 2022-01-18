@@ -11,9 +11,9 @@ import { GET_PREVIEW } from '../redux/ducks/gallery';
 const Gallery = ({ data }) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch({ type: GET_PREVIEW });
+    dispatch({type: GET_PREVIEW});
   }, [dispatch]);
-  
+
   return (
     <StyledContainer>
       <Row>
@@ -22,7 +22,7 @@ const Gallery = ({ data }) => {
             <>
               <StyledCol key={item.id} md={6} lg={4}>
                 <Link to={`/images/${item.id}`}>
-                  <img src={item.url} alt='preview' />
+                  <img src={item.url} alt="preview" />
                 </Link>
               </StyledCol>
               <Switch>
