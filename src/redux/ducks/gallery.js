@@ -89,9 +89,7 @@ function* settingFalse() {
 
 function* sendingComment(action) {
   try {
-    console.log(action.payload)
-    let result = yield call(postComment, action.payload);
-      console.log(result);
+    yield call(postComment, action.payload);
   } catch(e) {
     yield console.log(e)
     }

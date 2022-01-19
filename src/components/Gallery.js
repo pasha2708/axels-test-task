@@ -19,18 +19,19 @@ const Gallery = ({ data }) => {
       <Row>
         {data.images &&
           data.images.map((item) => (
-            <>
+           
               <StyledCol key={item.id} md={6} lg={4}>
                 <Link to={`/images/${item.id}`}>
                   <img src={item.url} alt="preview" />
                 </Link>
-              </StyledCol>
-              <Switch>
+                <Switch>
                 <Route path={`/images/${item.id}`}>
                   <ModalWindow id={item.id} data={data} />
                 </Route>
               </Switch>
-            </>
+              </StyledCol>
+              
+            
           ))}
       </Row>
     </StyledContainer>
