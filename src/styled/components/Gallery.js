@@ -1,6 +1,13 @@
+import { Col, Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const Substrate = styled.div`
+const StyledCol = styled(Col)`
+  img {
+    margin-bottom: 1rem;
+  }
+`;
+
+const StyledContainer = styled(Container)`
   display: block;
   text-align: center;
   img {
@@ -8,4 +15,4 @@ const Substrate = styled.div`
   }
 `;
 
-export default Substrate;
+export { StyledCol, StyledContainer };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryGray, primaryBlack } from '../vars';
+import { colors, sizes } from '../vars';
 
 const Overlay = styled.div`
   position: absolute;
@@ -12,8 +12,8 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1000px;
-  background-color: #fff;
+  max-width: ${sizes.container};
+  background-color: ${colors.primaryWhite};
   position: absolute;
   top: 50%;
   left: 50%;
@@ -27,17 +27,13 @@ const Container = styled.div`
   }
 `;
 
-const CommentList = styled.div`
-  /* display: flex; */
-`
-
 const Comment = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
   padding: 10px 30px;
   p:first-child {
-    color: ${primaryGray};
+    color: ${colors.primaryGray};
     margin-bottom: 5px;
   }
 `;
@@ -48,12 +44,12 @@ const ButtonClose = styled.div`
   right: 20px;
   top: 1px;
   span {
-    color: ${primaryGray};
+    color: ${colors.primaryGray};
     font-size: 40px;
     &:hover {
-      color: ${primaryBlack};
+      color: ${colors.primaryBlack};
     }
   }
 `;
 
-export { Overlay, Container, Comment, ButtonClose, CommentList }
+export { Overlay, Container, Comment, ButtonClose }

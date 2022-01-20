@@ -1,5 +1,12 @@
-const primaryGray = '#C0C0C0'
-const primaryBlack = '#000000'
+const colors = {
+  primaryGray: 'C0C0C0',
+  primaryBlack: '#000000',
+  primaryWhite: '#FFFFFF'
+};
 
-export { primaryGray, primaryBlack };
+const sizes = {
+  container: '1000px'
+}
+
+export { colors, sizes };
 

@@ -5,13 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from 'react-router-dom/cjs/react-router-dom.min';
 import { useSelector } from 'react-redux';
 
-
-
 const App = () => {
- 
-  const data = useSelector(state => state);
-  
-
+   const data = useSelector(state => state);
+   console.log(data);
   return (
     <div>
       <Router>
