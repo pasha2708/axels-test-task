@@ -16,7 +16,8 @@ export const fetchImage = (id) => {
 
   export const postComment = (action) => {
     return axios.post 
-      (`${URL}/${action.id}/comments`, action)
+    (`https://61e572d1c14c7a0017124c77.mockapi.io/123`, action)
+      // (`${URL}/${action.id}/comments`, action)
   .then(res => res.status)
 } 
 
