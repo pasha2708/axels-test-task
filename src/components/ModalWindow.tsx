@@ -17,8 +17,9 @@ import {
   SET_LOADED_FALSE,
   SEND_COMMENT,
 } from '../redux/ducks/gallery';
+import { BasicStateType } from '../redux/ducks/gallery';
 
-const ModalWindow = (props) => {
+const ModalWindow = (props: {data: BasicStateType, id: number}) => {
   let comments = props.data.fullImage.comments;
   const dispatch = useDispatch();
 
@@ -29,7 +30,7 @@ const ModalWindow = (props) => {
     });
   }, [dispatch, props.id]);
 
-  const dateFormat = (date) =>
+  const dateFormat = (date: number) =>
     new Date(date).toLocaleDateString().split('/').join('.');
 
   const formik = useFormik({
@@ -57,7 +58,7 @@ const ModalWindow = (props) => {
   return (
     <Overlay>
       <Container className='container'>
-        <Link exact='true' to='/'>
+        <Link exact='true' to='/' >
           <ButtonClose onClick={() => dispatch({ type: SET_LOADED_FALSE })}>
             <span>&times;</span>
           </ButtonClose>
