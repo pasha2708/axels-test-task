@@ -26,7 +26,9 @@ const ModalWindow = (props: {data: BasicStateType, id: number}) => {
   React.useEffect(() => {
     dispatch({
       type: GET_FULL_IMAGE,
-      payload: props.id,
+      payload: {
+        data: props.id
+      }
     });
   }, [dispatch, props.id]);
 

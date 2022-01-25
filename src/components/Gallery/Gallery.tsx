@@ -3,11 +3,11 @@ import { Switch, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 
-import { ModalWindow } from '.';
-import { StyledCol, StyledContainer } from '../styled/components/Gallery';
-import { RecievePreviewTypes, BasicStateType } from '../redux/ducks/gallery';
+import { ModalWindow } from '..';
+import { StyledCol, StyledContainer } from '../../styled/components/Gallery';
+import { RecievePreviewTypes, BasicStateType } from '../../redux/ducks/gallery';
 
-import { GET_PREVIEW } from '../redux/ducks/gallery';
+import { GET_PREVIEW } from '../../redux/ducks/gallery';
 
 const Gallery = () => {
   const data = useSelector((state: BasicStateType) => state);

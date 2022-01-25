@@ -38,7 +38,7 @@ export type RecievePreviewTypes = {
 export type recieveFullImgTypes = {
   url?: string,
   id?: number,
-  comments: CommentTypes[]
+  comments: Array<CommentTypes>
 }
 
 export type CommentTypes = {
@@ -49,7 +49,7 @@ export type CommentTypes = {
   name?: string
 }
 
-export default function reducer(state = basicState, action: ReducerActions) {
+export default function reducer (state = basicState, action: ReducerActions) {
   switch (action.type) {
     case RECIEVE_PREVIEW:
       const images  = action.payload.data;
@@ -112,7 +112,9 @@ type ReducerActions =
   | recievePreviewActionTypes 
   | recieveFullImgActionTypes 
   | settingLoadingFalseActionTypes 
-  | addNewCommentActionTypes;
+  | addNewCommentActionTypes
+  | ReturnType < typeof GetFullImageAction>
+  | SendCommentActionTypes;
 
 export const recievePreview = (data: Array<RecievePreviewTypes>): recievePreviewActionTypes => ({
   type: RECIEVE_PREVIEW,
@@ -155,8 +157,9 @@ function* fetchGetPreview() {
 }
 
 function* fetchFullImage(action: any) {
+  console.log(action);
   try {
-    const fullImage: recieveFullImgTypes = yield call(fetchImage, action.payload);
+    const fullImage: recieveFullImgTypes = yield call(fetchImage, action.payload.data);
     yield put(recieveFullImg(fullImage));
   } catch (e) {
       yield console.log(e);

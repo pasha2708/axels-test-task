@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 import { CommentTypes } from './redux/ducks/gallery'
 
 const URL = 'https://boiling-refuge-66454.herokuapp.com/images'
@@ -9,10 +9,10 @@ export const fetchPreview = () => {
       .then(res => res.data)  
   }
 
-export const fetchImage = (id: number) => {
+export const fetchImage = (id: Number)  => {
   return axios.get 
     (`${URL}/${id}`)
-    .then(res => res.data) 
+    .then((response) => response.data) 
 } 
 
   export const postComment = (action: CommentTypes) => {
