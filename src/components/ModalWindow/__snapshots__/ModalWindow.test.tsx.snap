@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalWindow should take snapshot 1`] = `
+<styled.div>
+  <styled.div
+    className="container"
+  >
+    <Link
+      to="/"
+    >
+      <styled.div
+        onClick={[Function]}
+      >
+        <span>
+          ×
+        </span>
+      </styled.div>
+    </Link>
+    <div
+      className="row"
+    >
+      <div
+        className="col col-md-6 col-12"
+      >
+        <img
+          alt=""
+          src="url"
+        />
+      </div>
+      <div
+        className="col-md-6 col-12"
+      >
+        <styled.div
+          className="col"
+          key="321"
+        >
+          <p>
+            20.06.2018
+          </p>
+          <p>
+            nice photo
+          </p>
+        </styled.div>
+        <styled.div
+          className="col"
+          key="123"
+        >
+          <p>
+            20.06.2018
+          </p>
+          <p>
+            nice photo2
+          </p>
+        </styled.div>
+      </div>
+    </div>
+    <Form
+      className="col-6"
+      onSubmit={[Function]}
+    >
+      <FormControl
+        className="mt-4 mb-4"
+        name="name"
+        onChange={[Function]}
+        placeholder="Ваше имя"
+        type="text"
+        value=""
+      />
+      <FormControl
+        className="mt-4 mb-4"
+        name="comment"
+        onChange={[Function]}
+        placeholder="Ваш комментарий"
+        type="text"
+        value=""
+      />
+      <div
+        className="d-grid gap-2"
+      >
+        <Button
+          active={false}
+          disabled={false}
+          type="submit"
+          variant="primary"
+        >
+          Оставить комментарий
+        </Button>
+      </div>
+    </Form>
+  </styled.div>
+</styled.div>
+`;

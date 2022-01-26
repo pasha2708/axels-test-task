@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
-import { validationSchema } from '../schemas';
+import { validationSchema } from '../../schemas';
 
 import {
   Overlay,
   Container,
   Comment,
   ButtonClose,
-} from '../styled/components/ModalWindow';
+} from '../../styled/components/ModalWindow';
 
 import {
   GET_FULL_IMAGE,
   SET_LOADED_FALSE,
   SEND_COMMENT
-} from '../redux/ducks/gallery';
-import { BasicStateType } from '../redux/ducks/gallery';
+} from '../../redux/ducks/gallery';
+import { BasicStateType } from '../../redux/ducks/gallery';
 
 const ModalWindow = (props: {data: BasicStateType, id: number}) => {
   let comments = props.data.fullImage.comments;

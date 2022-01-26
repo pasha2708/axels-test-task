@@ -1,5 +1,5 @@
 import { call, put, all, takeEvery } from 'redux-saga/effects';
-import { fetchPreview, fetchImage, postComment } from '../../api';
+import { fetchPreview, fetchImage, postComment } from '../../api/api';
 
 // Actions
 export const GET_PREVIEW = 'GET_PREVIEW';
@@ -13,7 +13,6 @@ export const POST_COMMENT = 'POST_COMMENT';
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
 
 // Reducer
-
 export type BasicStateType = {
   isLoaded: boolean,
   images: RecievePreviewTypes[]
@@ -78,22 +77,22 @@ export default function reducer (state = basicState, action: ReducerActions) {
 }
 
 // Action Creators
-type recievePreviewActionTypes = {
+export type recievePreviewActionTypes = {
   type: typeof RECIEVE_PREVIEW,
   payload: {data: Array<RecievePreviewTypes>}
 }
 
-type recieveFullImgActionTypes = {
+export type recieveFullImgActionTypes = {
   type: typeof RECIEVE_FULL_IMAGE,
   payload: {data: recieveFullImgTypes}
 }
 
-type settingLoadingFalseActionTypes = {
+export type settingLoadingFalseActionTypes = {
   type: typeof SETTING_LOADING_FALSE,
   payload: {data: Boolean}
 }
 
-type addNewCommentActionTypes = {
+export type addNewCommentActionTypes = {
   type: typeof ADD_NEW_COMMENT,
   payload: {data: CommentTypes}
 }
