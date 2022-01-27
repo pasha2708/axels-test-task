@@ -58,7 +58,7 @@ describe('actions', () => {
     });
   });
 
-  it('ashould send comment', () => {
+  it('should send comment', () => {
     expect(SendCommentAction(mockComment)).toStrictEqual({
       type: 'SEND_COMMENT',
       payload: {

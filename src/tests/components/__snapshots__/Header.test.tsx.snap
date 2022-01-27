@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header component should render Header 1`] = `
+exports[`Header component should render Header and take snapshot 1`] = `
 <styled.h1>
   Test App
 </styled.h1>

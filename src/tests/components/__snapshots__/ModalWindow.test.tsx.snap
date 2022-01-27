@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ModalWindow should take snapshot 1`] = `
+exports[`ModalWindow should take snapshot with props 1`] = `
 <styled.div>
   <styled.div
     className="container"
