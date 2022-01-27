@@ -1,3 +1,4 @@
+import { SagaIterator } from 'redux-saga';
 import { call, put, all, takeEvery } from 'redux-saga/effects';
 import { fetchPreview, fetchImage, postComment } from '../../api/api';
 
@@ -5,7 +6,7 @@ import { fetchPreview, fetchImage, postComment } from '../../api/api';
 export const GET_PREVIEW = 'GET_PREVIEW';
 export const RECIEVE_PREVIEW = 'RECIEVE_PREVIEW';
 export const GET_FULL_IMAGE = 'GET_FULL_IMAGE';
-export const RECIEVE_FULL_IMAGE = 'RECIEVE_FULL_IMAG';
+export const RECIEVE_FULL_IMAGE = 'RECIEVE_FULL_IMAGE';
 export const SET_LOADED_FALSE = 'SET_LOADED_FALSE';
 export const SETTING_LOADING_FALSE = 'SETTING_LOADING_FALSE';
 export const SEND_COMMENT = 'SEND_COMMENT';
@@ -48,7 +49,7 @@ export type CommentTypes = {
   name?: string
 }
 
-export default function reducer (state = basicState, action: ReducerActions) {
+export default function reducer (state = basicState, action: ReducerActionsTypes): BasicStateType {
   switch (action.type) {
     case RECIEVE_PREVIEW:
       const images  = action.payload.data;
@@ -58,7 +59,7 @@ export default function reducer (state = basicState, action: ReducerActions) {
       const fullImage = action.payload.data;
       return { ...state, fullImage, isLoaded: true };
 
-    case SETTING_LOADING_FALSE:
+    case SET_LOADED_FALSE:
       return { ...state, isLoaded: false };
 
     case ADD_NEW_COMMENT:
@@ -88,7 +89,7 @@ export type recieveFullImgActionTypes = {
 }
 
 export type settingLoadingFalseActionTypes = {
-  type: typeof SETTING_LOADING_FALSE,
+  type: typeof SET_LOADED_FALSE,
   payload: {data: Boolean}
 }
 
@@ -107,12 +108,12 @@ export type SendCommentActionTypes = {
   payload: {data: CommentTypes}
 }
 
-type ReducerActions = 
+export type ReducerActionsTypes = 
   | recievePreviewActionTypes 
   | recieveFullImgActionTypes 
   | settingLoadingFalseActionTypes 
   | addNewCommentActionTypes
-  | ReturnType < typeof GetFullImageAction>
+  | GetFullImageActionTypes
   | SendCommentActionTypes;
 
 export const recievePreview = (data: Array<RecievePreviewTypes>): recievePreviewActionTypes => ({
@@ -126,7 +127,7 @@ export const recieveFullImg = (data: recieveFullImgTypes): recieveFullImgActionT
 });
 
 export const settingLoadingFalse = (data: Boolean): settingLoadingFalseActionTypes  => ({
-  type: SETTING_LOADING_FALSE,
+  type: SET_LOADED_FALSE,
   payload: { data },
 });
 
@@ -146,34 +147,26 @@ export const SendCommentAction = (data: CommentTypes): SendCommentActionTypes =>
 });
 
 //Sagas
-function* fetchGetPreview() {
+export function* fetchGetPreview(): SagaIterator {
   try {
     const previewImages: Array<RecievePreviewTypes> = yield call(fetchPreview);
     yield put(recievePreview(previewImages));
   } catch (e) {
-      yield console.log(e);
+      console.log(e);
     }
 }
 
-function* fetchFullImage(action: any) {
+export function* fetchFullImage(action: GetFullImageActionTypes): SagaIterator  {
   console.log(action);
   try {
     const fullImage: recieveFullImgTypes = yield call(fetchImage, action.payload.data);
     yield put(recieveFullImg(fullImage));
   } catch (e) {
-      yield console.log(e);
+      console.log(e);
     }
 }
 
-function* settingFalse() {
-  try {
-    yield put(settingLoadingFalse(false));
-  } catch (e) {
-      yield console.log(e);
-    }
-}
-
-function* sendingComment(action: any) {
+export function* sendingComment(action: any): SagaIterator {
   let comment = {
     id: Math.floor(Math.random() * 1000),
     date: action.payload.date,
@@ -183,7 +176,7 @@ function* sendingComment(action: any) {
     yield call(postComment, action.payload);
     yield put(addNewComment(comment));
   } catch (e) {
-      yield console.log(e);
+      console.log(e);
     }
 }
 
@@ -191,7 +184,6 @@ export function* saga() {
   yield all([
     takeEvery(GET_PREVIEW, fetchGetPreview),
     takeEvery(GET_FULL_IMAGE, fetchFullImage),
-    takeEvery(SET_LOADED_FALSE, settingFalse),
     takeEvery(SEND_COMMENT, sendingComment),
   ]);
 }
