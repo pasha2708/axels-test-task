@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gallery should take snapshot 1`] = `
+<Styled(Container)>
+  <Row>
+    <Styled(Col)
+      key="123"
+      lg={4}
+      md={6}
+    >
+      <Link
+        to="/images/123"
+      >
+        <img
+          alt="preview"
+          src="fakeURL/"
+        />
+      </Link>
+      <Switch>
+        <Route
+          path="/images/123"
+        >
+          <ModalWindow
+            data={
+              Object {
+                "images": Array [
+                  Object {
+                    "id": 123,
+                    "url": "fakeURL/",
+                  },
+                  Object {
+                    "id": 321,
+                    "url": "fakeURL2/",
+                  },
+                ],
+              }
+            }
+            id={123}
+          />
+        </Route>
+      </Switch>
+    </Styled(Col)>
+    <Styled(Col)
+      key="321"
+      lg={4}
+      md={6}
+    >
+      <Link
+        to="/images/321"
+      >
+        <img
+          alt="preview"
+          src="fakeURL2/"
+        />
+      </Link>
+      <Switch>
+        <Route
+          path="/images/321"
+        >
+          <ModalWindow
+            data={
+              Object {
+                "images": Array [
+                  Object {
+                    "id": 123,
+                    "url": "fakeURL/",
+                  },
+                  Object {
+                    "id": 321,
+                    "url": "fakeURL2/",
+                  },
+                ],
+              }
+            }
+            id={321}
+          />
+        </Route>
+      </Switch>
+    </Styled(Col)>
+  </Row>
+</Styled(Container)>
+`;

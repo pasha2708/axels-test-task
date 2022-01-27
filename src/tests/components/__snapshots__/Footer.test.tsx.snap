@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should render Footer and take snapshot 1`] = `
+<styled.div>
+  <styled.div>
+    © 2021
+  </styled.div>
+</styled.div>
+`;
