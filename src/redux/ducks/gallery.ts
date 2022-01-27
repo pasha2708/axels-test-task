@@ -157,7 +157,6 @@ export function* fetchGetPreview(): SagaIterator {
 }
 
 export function* fetchFullImage(action: GetFullImageActionTypes): SagaIterator  {
-  console.log(action);
   try {
     const fullImage: recieveFullImgTypes = yield call(fetchImage, action.payload.data);
     yield put(recieveFullImg(fullImage));

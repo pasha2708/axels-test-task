@@ -11,7 +11,6 @@ import { GET_PREVIEW } from '../../redux/ducks/gallery';
 
 const Gallery = () => {
   const data = useSelector((state: BasicStateType) => state);
-  console.log(data);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch({ type: GET_PREVIEW });
