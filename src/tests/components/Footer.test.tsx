@@ -1,5 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Footer } from '../index';
+
+import { Footer } from '../../components';
 
 let component: ShallowWrapper;
 const setUp = () => shallow(<Footer />);
@@ -9,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('Footer component', () => {
-  it('should render Footer', () => {
+  it('should render Footer and take snapshot', () => {
     expect(component).toMatchSnapshot();
   });
 });

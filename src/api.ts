@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CommentTypes } from '../redux/ducks/gallery';
+import { CommentTypes } from './redux/ducks/gallery';
 
 const URL = 'https://boiling-refuge-66454.herokuapp.com/images';
 

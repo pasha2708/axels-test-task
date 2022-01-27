@@ -2,7 +2,7 @@ import {
   mockComment,
   mockFullImage,
   mockPreviewTypes,
-} from '../../__mocks__/fileMock';
+} from '../__mocks__/fileMock';
 import {
   recievePreview,
   recieveFullImg,
@@ -10,10 +10,10 @@ import {
   addNewComment,
   GetFullImageAction,
   SendCommentAction,
-} from './gallery';
+} from '../../redux/ducks/gallery';
 
 describe('actions', () => {
-  it('action recievePreview', () => {
+  it('should return array of preview images', () => {
     expect(recievePreview(mockPreviewTypes)).toStrictEqual({
       type: 'RECIEVE_PREVIEW',
       payload: {
@@ -22,7 +22,7 @@ describe('actions', () => {
     });
   });
 
-  it('action recieveFullImg', () => {
+  it('should return full image with comments', () => {
     expect(recieveFullImg(mockFullImage)).toStrictEqual({
       type: 'RECIEVE_FULL_IMAGE',
       payload: {
@@ -31,7 +31,7 @@ describe('actions', () => {
     });
   });
 
-  it('action settingLoadingFalse', () => {
+  it('should return isLoaded: false', () => {
     expect(settingLoadingFalse(true)).toStrictEqual({
       type: 'SET_LOADED_FALSE',
       payload: {
@@ -40,7 +40,7 @@ describe('actions', () => {
     });
   });
 
-  it('action addNewComment', () => {
+  it('should return comment', () => {
     expect(addNewComment(mockComment)).toStrictEqual({
       type: 'ADD_NEW_COMMENT',
       payload: {
@@ -49,7 +49,7 @@ describe('actions', () => {
     });
   });
 
-  it('action GetFullImageAction', () => {
+  it('should return full image', () => {
     expect(GetFullImageAction(123)).toStrictEqual({
       type: 'GET_FULL_IMAGE',
       payload: {
@@ -58,7 +58,7 @@ describe('actions', () => {
     });
   });
 
-  it('action SendCommentAction', () => {
+  it('ashould send comment', () => {
     expect(SendCommentAction(mockComment)).toStrictEqual({
       type: 'SEND_COMMENT',
       payload: {

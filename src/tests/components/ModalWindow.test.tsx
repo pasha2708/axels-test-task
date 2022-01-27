@@ -1,12 +1,11 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Switch } from 'react-router-dom';
-import { mockApiForGallery } from '../../__mocks__/fileMock';
 
-import Gallery from './Gallery';
+import { ModalWindow } from '../../components';
+import { mockStoreWithData } from '../__mocks__/fileMock';
 
 let component: ShallowWrapper;
 const mockUseDispatch = jest.fn();
-const setUp = () => shallow(<Gallery />);
+const setUp = () => shallow(<ModalWindow {...mockStoreWithData} />);
 
 beforeEach(async () => {
   component = await setUp();
@@ -19,15 +18,12 @@ afterEach(() => {
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useDispatch: () => mockUseDispatch,
-  useSelector: () => mockApiForGallery,
 }));
 
-describe('Gallery', () => {
-  it('should take snapshot', () => {
+describe('ModalWindow', () => {
+  it('should take snapshot with props', () => {
     expect(component).toMatchSnapshot();
   });
-
-  it('should render images', () => {
-    expect(component.find(Switch).children()).toHaveLength(2);
-  });
 });
+
+

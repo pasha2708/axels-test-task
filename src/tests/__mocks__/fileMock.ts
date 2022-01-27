@@ -1,4 +1,4 @@
-import { BasicStateType, CommentTypes, recieveFullImgTypes, RecievePreviewTypes } from '../redux/ducks/gallery';
+import { BasicStateType, CommentTypes, recieveFullImgTypes, RecievePreviewTypes } from '../../redux/ducks/gallery';
 
 export const mockStoreWithData = {
   data: {

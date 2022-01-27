@@ -1,5 +1,5 @@
-import { mockCommentPost, mockFullImage237, mockPreviewTypes } from '../__mocks__/fileMock';
-import { fetchImage, fetchPreview, postComment } from './api';
+import { mockCommentPost, mockFullImage237, mockPreviewTypes } from './__mocks__/fileMock';
+import { fetchImage, fetchPreview, postComment } from '../api';
 
 describe('Api', () => {
     it('fetchImage', async () => {

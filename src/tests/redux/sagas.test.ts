@@ -1,22 +1,22 @@
 import { runSaga } from '@redux-saga/core';
-import * as api from '../../api/api';
+import * as api from '../../api';
 import {
   mockFullImage237,
   mockPreviewTypes,
-} from '../../__mocks__/fileMock';
+} from '../../tests/__mocks__/fileMock';
 import {
   fetchFullImage,
   fetchGetPreview,
   GetFullImageAction,
   recieveFullImg,
   recievePreview,
-} from './gallery';
+} from '../../redux/ducks/gallery';
 
 afterEach(() => jest.resetAllMocks());
 
 describe('sagas', () => {
-  describe('fetchGetPreview()', () => {
-    it('should return array pf previews', async () => {
+  describe('saga fetchGetPreview', () => {
+    it('should return array of preview', async () => {
       const requestImages = jest
         .spyOn(api, 'fetchPreview')
         .mockImplementation(() => Promise.resolve(mockPreviewTypes));
@@ -32,8 +32,8 @@ describe('sagas', () => {
     });
   });
 
-  describe('fetchFullImage()', () => {
-    it('should return array full image with comments?', async () => {
+  describe('saga fetchFullImage', () => {
+    it('should return array full image with comments', async () => {
       const requestImage = jest
         .spyOn(api, 'fetchImage')
         .mockImplementation(() => Promise.resolve(mockFullImage237));

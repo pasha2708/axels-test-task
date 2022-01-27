@@ -1,6 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, all, takeEvery } from 'redux-saga/effects';
-import { fetchPreview, fetchImage, postComment } from '../../api/api';
+import { fetchPreview, fetchImage, postComment } from '../../api';
 
 // Actions
 export const GET_PREVIEW = 'GET_PREVIEW';

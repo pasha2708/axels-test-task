@@ -2,17 +2,17 @@ import reducer, {
   addNewComment,
   recieveFullImg,
   settingLoadingFalse,
-} from './gallery';
+} from '../../redux/ducks/gallery';
 import {
   mockCommentPost,
   mockedStore,
   mockFullImage,
-} from '../../__mocks__/fileMock';
+} from '../../tests/__mocks__/fileMock';
 
 const store = { ...mockedStore };
 
 describe('reducers', () => {
-  it('settingLoadingFalse', () => {
+  it('should return isLoaded: false', () => {
     const state = reducer(store, settingLoadingFalse(true));
     expect(state).toStrictEqual(store);
   });
@@ -27,7 +27,7 @@ describe('reducers', () => {
     expect(state).toStrictEqual(expectedState);
   });
 
-  it('should set fullImage to store', () => {
+  it('should set comment to store', () => {
     const state = reducer(store, addNewComment(mockCommentPost));
     const expectedState = {
       ...store,
