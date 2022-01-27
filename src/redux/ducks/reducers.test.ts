@@ -1,34 +1,13 @@
 import reducer, {
   addNewComment,
-  BasicStateType,
   recieveFullImg,
   settingLoadingFalse,
 } from './gallery';
-import recievePreview from './gallery';
-import { mockFullImage } from './actions.test';
-
-const mockedStore = {
-  images: [],
-  fullImage: {
-    id: 123,
-    url: 'url',
-    comments: [],
-  },
-  isLoaded: false,
-};
-
-export const mockFullImage237 = {
-  id: 237,
-  url: 'https://picsum.photos/id/237/600/400',
-  comments: [{ id: 153, text: 'Крутая фотка', date: 1578054737927 }],
-};
-
-export const mockCommentPost = {
-  id: 237,
-  date: 1578054737927,
-  comment: 'commentcomment',
-  name: 'Pasha'
-};
+import {
+  mockCommentPost,
+  mockedStore,
+  mockFullImage,
+} from '../../__mocks__/fileMock';
 
 const store = { ...mockedStore };
 

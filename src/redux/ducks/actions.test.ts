@@ -1,4 +1,9 @@
 import {
+  mockComment,
+  mockFullImage,
+  mockPreviewTypes,
+} from '../../__mocks__/fileMock';
+import {
   recievePreview,
   recieveFullImg,
   settingLoadingFalse,
@@ -6,27 +11,6 @@ import {
   GetFullImageAction,
   SendCommentAction,
 } from './gallery';
-
-export const mockPreviewTypes = [
-  { id: 237, url: 'https://picsum.photos/id/237/300/200' },
-  { id: 238, url: 'https://picsum.photos/id/238/300/200' },
-  { id: 239, url: 'https://picsum.photos/id/239/300/200' },
-  { id: 240, url: 'https://picsum.photos/id/240/300/200' },
-  { id: 241, url: 'https://picsum.photos/id/241/300/200' },
-  { id: 242, url: 'https://picsum.photos/id/242/300/200' },
-];
-
-export const mockFullImage = {
-  id: 123,
-  url: 'url/',
-  comments: [],
-};
-
-export const mockComment = {
-  id: 123,
-  date: 123456,
-  text: 'comment',
-};
 
 describe('actions', () => {
   it('action recievePreview', () => {

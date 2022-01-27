@@ -1,32 +1,10 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { ModalWindow } from '..';
-
-const props = {
-  data: {
-    images: [],
-    fullImage:{
-      id: 123,
-      url: 'url',
-      comments: [{
-        id: 321,
-        date: 1529500027127,
-        text: 'nice photo'
-      },
-      {
-        id: 123,
-        date: 1529500027128,
-        text: 'nice photo2'
-      }]
-    },
-    isLoaded: true,
-  },
-  
-  id: 123
-}
+import { mockStoreWithData } from '../../__mocks__/fileMock';
 
 let component: ShallowWrapper;
 const mockUseDispatch = jest.fn();
-const setUp = () => shallow(<ModalWindow {...props} />);
+const setUp = () => shallow(<ModalWindow {...mockStoreWithData} />);
 
 beforeEach(async () => {
   component = await setUp();
@@ -45,10 +23,6 @@ describe('ModalWindow', () => {
   it('should take snapshot', () => {
     expect(component).toMatchSnapshot();
   });
-
-  // it('should render images', () => {
-  //   expect(component.find(Switch).children()).toHaveLength(2);
-  // });
 });
 
 

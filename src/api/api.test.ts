@@ -1,8 +1,5 @@
-import { mockComment, mockPreviewTypes } from '../redux/ducks/actions.test';
-import { mockCommentPost, mockFullImage237 } from '../redux/ducks/reducers.test';
+import { mockCommentPost, mockFullImage237, mockPreviewTypes } from '../__mocks__/fileMock';
 import { fetchImage, fetchPreview, postComment } from './api';
-
-
 
 describe('Api', () => {
     it('fetchImage', async () => {

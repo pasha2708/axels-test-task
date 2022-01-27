@@ -1,20 +1,8 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Switch } from 'react-router-dom';
+import { mockApiForGallery } from '../../__mocks__/fileMock';
 
 import Gallery from './Gallery';
-
-const mockAPI = {
-  images: [
-    {
-      id: 123,
-      url: 'fakeURL/',
-    },
-    {
-      id: 321,
-      url: 'fakeURL2/',
-    },
-  ],
-};
 
 let component: ShallowWrapper;
 const mockUseDispatch = jest.fn();
@@ -31,7 +19,7 @@ afterEach(() => {
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useDispatch: () => mockUseDispatch,
-  useSelector: () => mockAPI,
+  useSelector: () => mockApiForGallery,
 }));
 
 describe('Gallery', () => {

@@ -1,17 +1,16 @@
 import { runSaga } from '@redux-saga/core';
 import * as api from '../../api/api';
-import { mockPreviewTypes } from './actions.test';
+import {
+  mockFullImage237,
+  mockPreviewTypes,
+} from '../../__mocks__/fileMock';
 import {
   fetchFullImage,
   fetchGetPreview,
   GetFullImageAction,
   recieveFullImg,
   recievePreview,
-  SendCommentAction,
-  sendingComment,
-  settingLoadingFalse,
 } from './gallery';
-import { mockCommentPost, mockFullImage237 } from './reducers.test';
 
 afterEach(() => jest.resetAllMocks());
 
@@ -48,24 +47,6 @@ describe('sagas', () => {
       );
       expect(requestImage).toHaveBeenCalledTimes(1);
       expect(dispatched).toEqual([recieveFullImg(mockFullImage237)]);
-    });
-  });
-
-  describe('sendingComment()', () => {
-    it('sending comment', async () => {
-      const requestImage = jest
-        .spyOn(api, 'postComment')
-        .mockImplementation(() => Promise.resolve(204));
-      const dispatched: [] = [];
-      await runSaga(
-        {
-          dispatch: (action: never) => dispatched.push(action),
-        },
-        sendingComment,
-        SendCommentAction(mockCommentPost)
-      );
-      expect(requestImage).toHaveBeenCalledTimes(1);
-      expect(dispatched).toEqual(204);
     });
   });
 });
