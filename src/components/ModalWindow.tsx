@@ -19,7 +19,7 @@ import {
 } from '../redux/ducks/gallery';
 import { BasicStateType } from '../redux/ducks/gallery';
 
-const ModalWindow = (props: {data: BasicStateType, id: number}) => {
+const ModalWindow = (props: { data: BasicStateType, id: number }) => {
   let comments = props.data.fullImage.comments;
   const dispatch = useDispatch();
 
@@ -57,10 +57,14 @@ const ModalWindow = (props: {data: BasicStateType, id: number}) => {
     },
   });
 
+  const deleteComment = () => {
+
+  }
+
   return (
     <Overlay>
       <Container className='container'>
-        <Link to='/'> 
+        <Link to='/'>
           <ButtonClose onClick={() => dispatch({ type: SET_LOADED_FALSE })}>
             <span>&times;</span>
           </ButtonClose>
@@ -77,6 +81,7 @@ const ModalWindow = (props: {data: BasicStateType, id: number}) => {
                 <Comment key={item.id} className='col'>
                   <p>{dateFormat(item.date)}</p>
                   <p>{item.text ? item.text : item.comment}</p>
+                  <button onClick={deleteComment}>Delete</button>
                 </Comment>
               ))}
           </div>
@@ -97,7 +102,7 @@ const ModalWindow = (props: {data: BasicStateType, id: number}) => {
             <div>{formik.errors.name}</div>
           )}
           <Form.Control
-            className={ 
+            className={
               formik.errors.comment && formik.touched.comment ? undefined : 'mt-4 mb-4'
             }
             name='comment'
