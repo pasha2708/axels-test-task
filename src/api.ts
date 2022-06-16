@@ -15,6 +15,6 @@ export const fetchImage = async (id: Number) => {
 };
 
 export const postComment = async (action: CommentTypes) => {
-	const res = await axios.post(`${URL2}/${action.id}/comments`, action);
+	const res = await axios.post(`${URL2}/${action.imageId}/comments`, action);
 	return res.status;
 };

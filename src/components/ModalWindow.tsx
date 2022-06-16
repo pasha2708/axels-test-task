@@ -15,7 +15,8 @@ import {
 import {
   GET_FULL_IMAGE,
   SET_LOADED_FALSE,
-  SEND_COMMENT
+  SEND_COMMENT,
+  DELETE_COMMENT
 } from '../redux/ducks/gallery';
 import { BasicStateType } from '../redux/ducks/gallery';
 
@@ -32,8 +33,9 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
     });
   }, [dispatch, props.id]);
 
-  const dateFormat = (date: number) =>
-    new Date(date).toLocaleDateString().split('/').join('.');
+  const dateFormat = (date: number) => {
+    return new Date(date).toLocaleDateString().split('/').join('.')
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +48,8 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
       dispatch({
         type: SEND_COMMENT,
         payload: {
-          id: props.data.fullImage.id,
+          imageId: props.data.fullImage.id,
+          id: Math.floor(Math.random() * 10000),
           comment: values.comment,
           name: values.name,
           date: new Date().getTime(),
@@ -57,8 +60,16 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
     },
   });
 
-  const deleteComment = () => {
-
+  const deleteComment = (e: any) => {
+    console.log(e)
+    dispatch({
+      type: DELETE_COMMENT,
+      payload: {
+        commentId: e,
+        pictureId: props.data.fullImage.id
+      }
+    }
+    )
   }
 
   return (
@@ -77,13 +88,15 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
           </div>
           <div className='col-md-6 col-12'>
             {comments &&
-              comments.map((item) => (
-                <Comment key={item.id} className='col'>
+              comments.map((item, index) => {
+                console.log(index)
+                console.log(dateFormat(item.date))
+                return (<Comment key={item.id} className='col'>
                   <p>{dateFormat(item.date)}</p>
                   <p>{item.text ? item.text : item.comment}</p>
-                  <button onClick={deleteComment}>Delete</button>
-                </Comment>
-              ))}
+                  <button onClick={() => deleteComment(item.id)}>Delete</button>
+                </Comment>)
+              })}
           </div>
         </div>
         <Form className='col-6' onSubmit={formik.handleSubmit}>
