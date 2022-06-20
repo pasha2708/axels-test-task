@@ -1,15 +1,15 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import { ModalWindow } from '../../components';
-import { mockStoreWithData } from '../__mocks__/fileMock';
+//import { mockStoreWithData } from '../__mocks__/fileMock';
 
 let component: ShallowWrapper;
 const mockUseDispatch = jest.fn();
-const setUp = () => shallow(<ModalWindow {...mockStoreWithData} />);
+// const setUp = () => shallow(<ModalWindow {...mockStoreWithData} />);
 
-beforeEach(async () => {
-  component = await setUp();
-});
+// // beforeEach(async () => {
+//   component = await setUp();
+// });
 
 afterEach(() => {
   jest.resetAllMocks();

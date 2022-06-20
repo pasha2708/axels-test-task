@@ -2,7 +2,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { Switch } from 'react-router-dom';
 
 import { Gallery } from '../../components';
-import { mockApiForGallery } from '../__mocks__/fileMock';
+// import { mockApiForGallery } from '../__mocks__/fileMock';
 
 let component: ShallowWrapper;
 const mockUseDispatch = jest.fn();
@@ -19,7 +19,7 @@ afterEach(() => {
 jest.mock('react-redux', () => ({
   ...jest.requireActual('react-redux'),
   useDispatch: () => mockUseDispatch,
-  useSelector: () => mockApiForGallery,
+  // useSelector: () => mockApiForGallery,
 }));
 
 describe('Gallery', () => {

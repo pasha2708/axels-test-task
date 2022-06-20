@@ -1,16 +1,17 @@
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import reducer from "./reducer";
+import saga from "./saga";
 
-import { saga } from './ducks/gallery'
-import reducer from './ducks/gallery';
+let sagaMiddleware = createSagaMiddleware();
 
-const sagaMiddleware = createSagaMiddleware()
+export const store = configureStore({
+	reducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(sagaMiddleware),
+});
 
-const store = createStore(
-  reducer,
-  applyMiddleware(sagaMiddleware)
-)
+export type RootState = ReturnType<typeof store.getState>; //TODO
+export type AppDispatch = typeof store.dispatch; //TODO
 
-sagaMiddleware.run(saga)
-
-export default store;
+sagaMiddleware.run(saga);

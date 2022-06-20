@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { validationSchema } from '../schemas';
@@ -11,27 +11,21 @@ import {
   Comment,
   ButtonClose,
 } from '../styled/components/ModalWindow';
+import { BasicStateTypes, clearFullImage } from '../redux/reducer';
+import { sagaActions } from '../redux/sagaActions';
 
-import {
-  GET_FULL_IMAGE,
-  SET_LOADED_FALSE,
-  SEND_COMMENT,
-  DELETE_COMMENT
-} from '../redux/ducks/gallery';
-import { BasicStateType } from '../redux/ducks/gallery';
 
-const ModalWindow = (props: { data: BasicStateType, id: number }) => {
-  let comments = props.data.fullImage.comments;
+const ModalWindow = (props: { data?: any, id?: number }) => {
+  const { id } = useParams<{ id: string }>()
+  const { url: imageUrl, comments } = useSelector((state: BasicStateTypes) => state.fullImage);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    dispatch(clearFullImage())
     dispatch({
-      type: GET_FULL_IMAGE,
-      payload: {
-        data: props.id
-      }
+      type: sagaActions.FETCH_FULL_IMAGE, payload: id
     });
-  }, [dispatch, props.id]);
+  }, [dispatch, id]);
 
   const dateFormat = (date: number) => {
     return new Date(date).toLocaleDateString().split('/').join('.')
@@ -45,16 +39,16 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       formik.setSubmitting(true);
-      dispatch({
-        type: SEND_COMMENT,
-        payload: {
-          imageId: props.data.fullImage.id,
-          id: Math.floor(Math.random() * 10000),
-          comment: values.comment,
-          name: values.name,
-          date: new Date().getTime(),
-        },
-      });
+      // dispatch({
+      //   type: SEND_COMMENT,
+      //   payload: {
+      //     imageId: props.data.fullImage.id,
+      //     id: Math.floor(Math.random() * 10000),
+      //     comment: values.comment,
+      //     name: values.name,
+      //     date: new Date().getTime(),
+      //   },
+      // });
       formik.resetForm();
       formik.setSubmitting(false);
     },
@@ -62,32 +56,31 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
 
   const deleteComment = (e: any) => {
     console.log(e)
-    dispatch({
-      type: DELETE_COMMENT,
-      payload: {
-        commentId: e,
-        pictureId: props.data.fullImage.id
-      }
-    }
-    )
+    // dispatch({
+    //   type: DELETE_COMMENT,
+    //   payload: {
+    //     commentId: e,
+    //     pictureId: props.data.fullImage.id
+    //   }
+    // }
+    // )
   }
 
   return (
     <Overlay>
       <Container className='container'>
         <Link to='/'>
-          <ButtonClose onClick={() => dispatch({ type: SET_LOADED_FALSE })}>
+          <ButtonClose>
             <span>&times;</span>
           </ButtonClose>
         </Link>
         <div className='row'>
           <div className='col col-md-6 col-12'>
-            {props.data.isLoaded && (
-              <img src={props.data.fullImage.url} alt='' />
-            )}
+            <img src={imageUrl} alt='full image' />
           </div>
           <div className='col-md-6 col-12'>
-            {comments &&
+            {/* {comments &&
+              // ts-ignore
               comments.map((item, index) => {
                 console.log(index)
                 console.log(dateFormat(item.date))
@@ -96,7 +89,7 @@ const ModalWindow = (props: { data: BasicStateType, id: number }) => {
                   <p>{item.text ? item.text : item.comment}</p>
                   <button onClick={() => deleteComment(item.id)}>Delete</button>
                 </Comment>)
-              })}
+              })} */}
           </div>
         </div>
         <Form className='col-6' onSubmit={formik.handleSubmit}>
