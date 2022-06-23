@@ -13,6 +13,7 @@ export interface FullImageTypes {
 
 export interface CommentTypes {
 	id: number;
+	date: number;
 	author: string;
 	text: string;
 }

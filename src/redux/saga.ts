@@ -1,7 +1,7 @@
 import { SagaIterator } from "redux-saga";
 import { call, takeEvery, put, all } from "redux-saga/effects";
 import { sagaActions } from "./sagaActions";
-import { fetchPreview, fetchImage, postComment } from "../api";
+import { fetchPreview, fetchImage, postComment, deleteComment } from "../api";
 import { FullImageTypes, setFullImage, setImages } from "./reducer";
 import { ImageTypes } from "./reducer";
 import { AppDispatch } from "./store";
@@ -25,9 +25,29 @@ export function* fetchFullImage({ payload }: any): SagaIterator {
 	}
 }
 
+export function* sendCommentSaga({ payload }: any): SagaIterator {
+	try {
+		const data = yield call(postComment, payload);
+		yield put(setFullImage(data));
+	} catch (e) {
+		console.log(e);
+	}
+}
+
+export function* deleteCommentSaga({ payload }: any): SagaIterator {
+	try {
+		const data = yield call(deleteComment, payload);
+		yield put(setFullImage(data));
+	} catch (e) {
+		console.log(e);
+	}
+}
+
 export default function* rootSaga() {
 	yield all([
 		takeEvery(sagaActions.FETCH_IMAGES, fetchGetPreview),
 		takeEvery(sagaActions.FETCH_FULL_IMAGE, fetchFullImage),
+		takeEvery(sagaActions.SEND_COMMENT, sendCommentSaga),
+		takeEvery(sagaActions.DELETE_COMMENT, deleteCommentSaga),
 	]);
 }

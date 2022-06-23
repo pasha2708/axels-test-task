@@ -10,7 +10,7 @@ import { BasicStateTypes, ImageTypes } from '../redux/reducer';
 
 
 const Gallery = () => {
-  const data = useSelector((state: BasicStateTypes) => state);
+  const images = useSelector((state: BasicStateTypes) => state.images);
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch({ type: sagaActions.FETCH_IMAGES });
@@ -19,8 +19,8 @@ const Gallery = () => {
   return (
     <StyledContainer>
       <Row>
-        {data.images &&
-          data.images.map((item: ImageTypes) => (
+        {images &&
+          images.map((item: ImageTypes) => (
             <StyledCol key={item.id} md={6} lg={4}>
               <Link to={`/images/${item.id}`}>
                 <img src={item.url} alt='preview' />
@@ -29,7 +29,7 @@ const Gallery = () => {
           ))}
         <Switch> //TODO Routes!!!
           <Route path={'/images/:id'}>
-            <ModalWindow data={data} />
+            <ModalWindow />
           </Route>
         </Switch>
       </Row>
