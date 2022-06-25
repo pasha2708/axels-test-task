@@ -135,7 +135,7 @@ const ModalWindow = () => {
             </Button>
           </div>
         </Form>
-        {editModal && <EditComment item={commentData} imageId={imageId} />}
+        {editModal && <EditComment item={commentData} imageId={imageId} onClose={() => setEditModal(false)} />}
       </Container>
     </Overlay>
   );

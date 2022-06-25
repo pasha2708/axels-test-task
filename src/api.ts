@@ -13,8 +13,8 @@ interface DeleteCommentTypes {
 	imageId: number;
 }
 
-const URL = "https://boiling-refuge-66454.herokuapp.com/images";
-const URL2 = "http://localhost:5000/images";
+const URL = "http://localhost:5000/images";
+const URL2 = "https://axels-gallery-be.herokuapp.com/images";
 
 export const fetchPreview = async () => {
 	const response = await axios.get(URL2);
@@ -38,6 +38,15 @@ export const deleteComment = async ({
 }: DeleteCommentTypes) => {
 	const response = await axios.delete(
 		`${URL2}/${imageId}/comments/${commentId}`
+	);
+	return response.data;
+};
+
+export const editComment = async (payload: any) => {
+	const { imageId, ...data } = payload;
+	const response = await axios.patch(
+		`${URL2}/${imageId}/comments/${payload.id}`,
+		data
 	);
 	return response.data;
 };

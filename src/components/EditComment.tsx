@@ -1,17 +1,18 @@
 import React from 'react'
-import { Container, Overlay } from '../styled/components/ModalWindow'
+import { ButtonClose, Container, Overlay } from '../styled/components/ModalWindow'
 import styled from 'styled-components'
 import { Button, Form } from 'react-bootstrap'
 import { validationSchema } from '../schemas'
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux'
+import { sagaActions } from '../redux/sagaActions'
 
 const EditContainer = styled(Container)`
   min-width: 500px;
 `
 
 const EditComment = (props: any) => {
-
-  console.log(props)
+  const dispatch = useDispatch();
 
   const formik: any = useFormik({
     initialValues: {
@@ -21,28 +22,32 @@ const EditComment = (props: any) => {
     validationSchema: validationSchema,
     onSubmit: (values: any) => {
       formik.setSubmitting(true);
-      // dispatch({
-      //   type: sagaActions.SEND_COMMENT,
-      //   payload: {
-      //     imageId,
-      //     id: Math.floor(Math.random() * 10000),
-      //     date: new Date().getTime(),
-      //     ...values
-      //   },
-      // });
+      dispatch({
+        type: sagaActions.EDIT_COMMENT,
+        payload: {
+          imageId: props.imageId,
+          id: props.item.id,
+          date: new Date().getTime(),
+          ...values
+        },
+      });
       formik.resetForm();
       formik.setSubmitting(false);
+      props.onClose()
     },
   });
   return (
     <Overlay>
       <EditContainer>
+        <ButtonClose onClick={props.onClose}>
+          <span>&times;</span>
+        </ButtonClose>
         <Form className='col-12' onSubmit={formik.handleSubmit}>
           <Form.Control
             className={
               formik.errors.author && formik.touched.author ? 'mt-4' : 'mt-4 mb-4'
             }
-            required
+            disabled
             name='author'
             type='text'
             placeholder='Name'
