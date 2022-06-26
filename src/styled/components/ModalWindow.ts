@@ -14,6 +14,11 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
+	display: grid;
+	grid-template-areas:
+		"photo comments"
+		"form comments";
+	grid-auto-columns: 1fr;
 	max-width: ${sizes.container};
 	background-color: ${colors.primaryWhite};
 	position: absolute;
@@ -34,10 +39,21 @@ const Comment = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: start;
-	padding: 10px 30px;
+	padding: 0 30px;
 	p:first-child {
 		color: ${colors.primaryGray};
 		margin-bottom: 5px;
+	}
+`;
+
+const CommentsBlock = styled.div`
+	grid-area: comments;
+`;
+
+const PhotoStyled = styled.div`
+	grid-area: photo;
+	img {
+		width: 500px;
 	}
 `;
 
@@ -71,4 +87,13 @@ const ButtonEdit = styled(EditIcon)`
 	color: grey;
 `;
 
-export { Overlay, Container, Comment, ButtonClose, ButtonDelete, ButtonEdit };
+export {
+	Overlay,
+	Container,
+	Comment,
+	ButtonClose,
+	ButtonDelete,
+	ButtonEdit,
+	CommentsBlock,
+	PhotoStyled,
+};

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import { validationSchema } from '../schemas';
 
@@ -12,12 +11,25 @@ import {
   Comment,
   ButtonClose,
   ButtonDelete,
-  ButtonEdit
+  ButtonEdit,
+  CommentsBlock,
+  PhotoStyled
 } from '../styled/components/ModalWindow';
 import { BasicStateTypes, clearFullImage } from '../redux/reducer';
 import { sagaActions } from '../redux/sagaActions';
 import EditComment from './EditComment';
+import styled from 'styled-components';
+import { TextField, Button } from '@mui/material';
 
+const StyledForm = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledTextField = styled.div`
+  margin: 50px 0;
+  height: 30px;
+`
 
 const ModalWindow = () => {
   const { id: imageId } = useParams<{ id: string }>()
@@ -44,6 +56,7 @@ const ModalWindow = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log('values', values)
       formik.setSubmitting(true);
       dispatch({
         type: sagaActions.SEND_COMMENT,
@@ -73,68 +86,56 @@ const ModalWindow = () => {
 
   return (
     <Overlay>
-      <Container className='container'>
+      <Container>
         <Link to='/'>
           <ButtonClose>
             <span>&times;</span>
           </ButtonClose>
         </Link>
-        <div className='row'>
-          <div className='col col-md-6 col-12'>
-            <img src={imageUrl} alt='full image' />
-          </div>
-          <div className='col-md-6 col-12'>
-            {comments && comments.map((item) => (
-              <Comment key={item.id} className='col'>
-                <p>{dateFormat(item.date)}</p>
-                <p>{item.text}</p>
-                <ButtonDelete onClick={() => deleteComment(item.id)} />
-                <ButtonEdit onClick={() => openEditModal(item)} />
-              </Comment>
-            ))}
-          </div>
-        </div>
-        <Form className='col-6' onSubmit={formik.handleSubmit}>
-          <Form.Control
-            className={
-              formik.errors.author && formik.touched.author ? 'mt-4' : 'mt-4 mb-4'
-            }
-            required
-            name='author'
-            type='text'
-            placeholder='Name'
-            onChange={formik.handleChange}
-            value={formik.values.author}
-            isInvalid={formik.touched.author && Boolean(formik.errors.author)}
-          />
-          {formik.touched.author && formik.errors.author && (
-            <div>{formik.errors.author}</div>
-          )}
-          <Form.Control
-            className={
-              formik.errors.text && formik.touched.text ? undefined : 'mt-4 mb-4'
-            }
+        <PhotoStyled>
+          <img src={imageUrl} alt='full image' />
+        </PhotoStyled>
+        <CommentsBlock>
+          {comments && comments.map((item) => (
+            <Comment key={item.id} className='col'>
+              <p>{dateFormat(item.date)}</p>
+              <p>{item.text}</p>
+              <ButtonDelete onClick={() => deleteComment(item.id)} />
+              <ButtonEdit onClick={() => openEditModal(item)} />
+            </Comment>
+          ))}
+        </CommentsBlock>
+        <StyledForm>
+          <StyledTextField>
+            <TextField
+              required
+              fullWidth
+              name='author'
+              label='Name'
+              onChange={formik.handleChange}
+              value={formik.values.author}
+              error={formik.touched.author && Boolean(formik.errors.author)}
+              helperText={(formik.touched.author && Boolean(formik.errors.author)) && formik.errors.author}
+            />
+          </StyledTextField>
+          <TextField
             required
             name='text'
             type='text'
-            placeholder='Your comment'
+            label='Your comment'
             onChange={formik.handleChange}
             value={formik.values.text}
-            isInvalid={formik.touched.text && Boolean(formik.errors.text)}
+            error={formik.touched.text && Boolean(formik.errors.text)}
           />
-          {formik.touched.text && formik.errors.text && (
-            <div>{formik.errors.text}</div>
-          )}
           <div className='d-grid gap-2'>
             <Button
-              variant='primary'
-              type='submit'
+              onClick={formik.handleSubmit}
               disabled={formik.isSubmitting}
             >
               Submit
             </Button>
           </div>
-        </Form>
+        </StyledForm>
         {editModal && <EditComment item={commentData} imageId={imageId} onClose={() => setEditModal(false)} />}
       </Container>
     </Overlay>
