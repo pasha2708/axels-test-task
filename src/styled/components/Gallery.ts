@@ -1,18 +1,19 @@
-import { Col, Container } from 'react-bootstrap';
-import styled from 'styled-components';
+import { Col, Container } from "react-bootstrap";
+import styled from "styled-components";
 
 const StyledCol = styled(Col)`
-  img {
-    margin-bottom: 1rem;
-  }
+	img {
+		margin: 15px;
+	}
 `;
 
 const StyledContainer = styled(Container)`
-  display: block;
-  text-align: center;
-  img {
-    cursor: pointer;
-  }
+	margin-left: auto;
+    margin-right: auto;
+	max-width: 1200px;
+	img {
+		cursor: pointer;
+	}
 `;
 
 export { StyledCol, StyledContainer };

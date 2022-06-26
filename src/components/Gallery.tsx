@@ -7,7 +7,15 @@ import { ModalWindow } from '../components';
 import { StyledCol, StyledContainer } from '../styled/components/Gallery';
 import { sagaActions } from '../redux/sagaActions';
 import { BasicStateTypes, ImageTypes } from '../redux/reducer';
+import styled from 'styled-components';
 
+
+const GalleryStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  
+`
 
 const Gallery = () => {
   const images = useSelector((state: BasicStateTypes) => state.images);
@@ -18,7 +26,7 @@ const Gallery = () => {
 
   return (
     <StyledContainer>
-      <Row>
+      <GalleryStyle>
         {images &&
           images.map((item: ImageTypes) => (
             <StyledCol key={item.id} md={6} lg={4}>
@@ -32,7 +40,7 @@ const Gallery = () => {
             <ModalWindow />
           </Route>
         </Switch>
-      </Row>
+      </GalleryStyle>
     </StyledContainer>
   );
 };
