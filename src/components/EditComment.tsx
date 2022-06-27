@@ -1,14 +1,29 @@
 import React from 'react'
 import { ButtonClose, Container, Overlay } from '../styled/components/ModalWindow'
 import styled from 'styled-components'
-import { Button, Form } from 'react-bootstrap'
 import { validationSchema } from '../schemas'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux'
 import { sagaActions } from '../redux/sagaActions'
+import { StyledTextField } from './ModalWindow'
+import { TextField, Button } from '@mui/material';
+import { colors } from '../styled/vars';
 
-const EditContainer = styled(Container)`
-  min-width: 500px;
+const EditContainer = styled.div`
+background-color: ${colors.primaryWhite};
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	padding: 2rem;
+  width: 50%;
+`
+
+export const StyledForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 const EditComment = (props: any) => {
@@ -42,47 +57,38 @@ const EditComment = (props: any) => {
         <ButtonClose onClick={props.onClose}>
           <span>&times;</span>
         </ButtonClose>
-        <Form className='col-12' onSubmit={formik.handleSubmit}>
-          <Form.Control
-            className={
-              formik.errors.author && formik.touched.author ? 'mt-4' : 'mt-4 mb-4'
-            }
-            disabled
-            name='author'
-            type='text'
-            placeholder='Name'
-            onChange={formik.handleChange}
-            value={formik.values.author}
-            isInvalid={formik.touched.author && Boolean(formik.errors.author)}
-          />
-          {formik.touched.author && formik.errors.author && (
-            <div>{formik.errors.author}</div>
-          )}
-          <Form.Control
-            className={
-              formik.errors.text && formik.touched.text ? undefined : 'mt-4 mb-4'
-            }
-            required
-            name='text'
-            type='text'
-            placeholder='Your comment'
-            onChange={formik.handleChange}
-            value={formik.values.text}
-            isInvalid={formik.touched.text && Boolean(formik.errors.text)}
-          />
-          {formik.touched.text && formik.errors.text && (
-            <div>{formik.errors.text}</div>
-          )}
-          <div className='d-grid gap-2'>
-            <Button
-              variant='primary'
-              type='submit'
-              disabled={formik.isSubmitting}
-            >
-              Submit
-            </Button>
-          </div>
-        </Form>
+        <StyledForm>
+          <StyledTextField>
+            <TextField
+              disabled
+              fullWidth
+              name='author'
+              label='Name'
+              value={formik.values.author}
+            />
+          </StyledTextField>
+          <StyledTextField>
+            <TextField
+              required
+              fullWidth
+              name='text'
+              type='text'
+              label='Your comment'
+              onChange={formik.handleChange}
+              value={formik.values.text}
+              error={formik.touched.text && Boolean(formik.errors.text)}
+              helperText={(formik.touched.text && Boolean(formik.errors.text)) && formik.errors.text}
+            />
+          </StyledTextField>
+          <Button
+            fullWidth
+            variant='contained'
+            onClick={formik.handleSubmit}
+            disabled={formik.isSubmitting}
+          >
+            Submit
+          </Button>
+        </StyledForm>
       </EditContainer>
     </Overlay>
 

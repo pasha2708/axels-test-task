@@ -48,6 +48,9 @@ const Comment = styled.div`
 
 const CommentsBlock = styled.div`
 	grid-area: comments;
+	height: 550px;
+	overflow-y: auto;
+	margin-right: 30px;
 `;
 
 const PhotoStyled = styled.div`

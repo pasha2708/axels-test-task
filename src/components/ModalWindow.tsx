@@ -21,14 +21,16 @@ import EditComment from './EditComment';
 import styled from 'styled-components';
 import { TextField, Button } from '@mui/material';
 
-const StyledForm = styled.div`
+export const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
+  grid-area: form;
 `
 
-const StyledTextField = styled.div`
-  margin: 50px 0;
-  height: 30px;
+export const StyledTextField = styled.div`
+height: 40px;
+margin-top: 15px;
+margin-bottom: 40px;
 `
 
 const ModalWindow = () => {
@@ -45,8 +47,12 @@ const ModalWindow = () => {
     });
   }, [dispatch, imageId]);
 
-  const dateFormat = (date: number) => {
-    return new Date(date).toLocaleDateString().split('/').join('.')
+  const dateFormat = (timestamp: number) => {
+    const date = new Date(timestamp)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
+    return `${day}.${month}.${year}`
   }
 
   const formik: any = useFormik({
@@ -56,7 +62,6 @@ const ModalWindow = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log('values', values)
       formik.setSubmitting(true);
       dispatch({
         type: sagaActions.SEND_COMMENT,
@@ -93,7 +98,7 @@ const ModalWindow = () => {
           </ButtonClose>
         </Link>
         <PhotoStyled>
-          <img src={imageUrl} alt='full image' />
+          <img src={imageUrl} alt='full' />
         </PhotoStyled>
         <CommentsBlock>
           {comments && comments.map((item) => (
@@ -118,23 +123,27 @@ const ModalWindow = () => {
               helperText={(formik.touched.author && Boolean(formik.errors.author)) && formik.errors.author}
             />
           </StyledTextField>
-          <TextField
-            required
-            name='text'
-            type='text'
-            label='Your comment'
-            onChange={formik.handleChange}
-            value={formik.values.text}
-            error={formik.touched.text && Boolean(formik.errors.text)}
-          />
-          <div className='d-grid gap-2'>
-            <Button
-              onClick={formik.handleSubmit}
-              disabled={formik.isSubmitting}
-            >
-              Submit
-            </Button>
-          </div>
+          <StyledTextField>
+            <TextField
+              required
+              fullWidth
+              name='text'
+              type='text'
+              label='Your comment'
+              onChange={formik.handleChange}
+              value={formik.values.text}
+              error={formik.touched.text && Boolean(formik.errors.text)}
+              helperText={(formik.touched.text && Boolean(formik.errors.text)) && formik.errors.text}
+            />
+          </StyledTextField>
+          <Button
+            fullWidth
+            variant='contained'
+            onClick={formik.handleSubmit}
+            disabled={formik.isSubmitting}
+          >
+            Submit
+          </Button>
         </StyledForm>
         {editModal && <EditComment item={commentData} imageId={imageId} onClose={() => setEditModal(false)} />}
       </Container>

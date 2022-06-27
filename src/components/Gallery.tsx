@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Row from 'react-bootstrap/Row';
 
 import { ModalWindow } from '../components';
 import { StyledCol, StyledContainer } from '../styled/components/Gallery';
@@ -29,7 +28,7 @@ const Gallery = () => {
       <GalleryStyle>
         {images &&
           images.map((item: ImageTypes) => (
-            <StyledCol key={item.id} md={6} lg={4}>
+            <StyledCol key={item.id}>
               <Link to={`/images/${item.id}`}>
                 <img src={item.url} alt='preview' />
               </Link>
