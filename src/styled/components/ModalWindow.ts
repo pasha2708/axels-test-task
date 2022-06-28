@@ -32,6 +32,15 @@ const Container = styled.div`
 		width: 100%;
 		object-fit: cover;
 	}
+	@media (max-width: 900px) {
+		grid-template-areas:
+			"photo"
+			"comments"
+			"form";
+		top: 0;
+		transform: translate(-50%, 0);
+		padding: 0;
+	}
 `;
 
 const Comment = styled.div`
@@ -51,6 +60,10 @@ const CommentsBlock = styled.div`
 	height: 550px;
 	overflow-y: auto;
 	margin-right: 30px;
+  @media (max-width: 900px) {
+    padding: 10px;
+    margin: 0;
+  }
 `;
 
 const PhotoStyled = styled.div`
