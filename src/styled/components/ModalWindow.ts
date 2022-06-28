@@ -14,6 +14,11 @@ const Overlay = styled.div`
 `;
 
 const Container = styled.div`
+	display: grid;
+	grid-template-areas:
+		"photo comments"
+		"form comments";
+	grid-auto-columns: 1fr;
 	max-width: ${sizes.container};
 	background-color: ${colors.primaryWhite};
 	position: absolute;
@@ -27,6 +32,15 @@ const Container = styled.div`
 		width: 100%;
 		object-fit: cover;
 	}
+	@media (max-width: 900px) {
+		grid-template-areas:
+			"photo"
+			"comments"
+			"form";
+		top: 0;
+		transform: translate(-50%, 0);
+		padding: 0;
+	}
 `;
 
 const Comment = styled.div`
@@ -34,10 +48,28 @@ const Comment = styled.div`
 	display: flex;
 	flex-direction: column;
 	text-align: start;
-	padding: 10px 30px;
+	padding: 0 30px;
 	p:first-child {
 		color: ${colors.primaryGray};
 		margin-bottom: 5px;
+	}
+`;
+
+const CommentsBlock = styled.div`
+	grid-area: comments;
+	height: 550px;
+	overflow-y: auto;
+	margin-right: 30px;
+  @media (max-width: 900px) {
+    padding: 10px;
+    margin: 0;
+  }
+`;
+
+const PhotoStyled = styled.div`
+	grid-area: photo;
+	img {
+		width: 500px;
 	}
 `;
 
@@ -71,4 +103,13 @@ const ButtonEdit = styled(EditIcon)`
 	color: grey;
 `;
 
-export { Overlay, Container, Comment, ButtonClose, ButtonDelete, ButtonEdit };
+export {
+	Overlay,
+	Container,
+	Comment,
+	ButtonClose,
+	ButtonDelete,
+	ButtonEdit,
+	CommentsBlock,
+	PhotoStyled,
+};

@@ -1,5 +1,5 @@
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Switch } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
 
 import { Gallery } from '../../components';
 // import { mockApiForGallery } from '../__mocks__/fileMock';
@@ -28,6 +28,6 @@ describe('Gallery', () => {
   });
 
   it('should render 2 images', () => {
-    expect(component.find(Switch).children()).toHaveLength(2);
+    expect(component.find(Routes).children()).toHaveLength(2);
   });
 });

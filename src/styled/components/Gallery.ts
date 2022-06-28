@@ -1,14 +1,15 @@
-import { Col, Container } from "react-bootstrap";
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const StyledCol = styled(Col)`
+const StyledCol = styled.div`
 	img {
-		margin-bottom: 1rem;
+		margin: 15px;
 	}
 `;
 
-const StyledContainer = styled(Container)`
-	text-align: center;
+const StyledContainer = styled.div`
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1200px;
 	img {
 		cursor: pointer;
 	}

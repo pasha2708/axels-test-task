@@ -4,7 +4,7 @@ import { FooterText, FooterDiv } from '../styled/components/Footer'
 
 const Footer = () => (
   <FooterDiv>
-    <FooterText>© 2021</FooterText>
+    <FooterText>{`© ${new Date().getFullYear()}`}</FooterText>
   </FooterDiv>
 );
 
