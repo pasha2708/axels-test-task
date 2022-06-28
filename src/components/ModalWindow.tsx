@@ -18,7 +18,7 @@ import { BasicStateTypes, clearFullImage } from '../redux/reducer';
 import { sagaActions } from '../redux/sagaActions';
 import EditComment from './EditComment';
 import styled from 'styled-components';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, CircularProgress } from '@mui/material';
 
 export const StyledForm = styled.div`
 	display: flex;
@@ -103,7 +103,11 @@ const ModalWindow = () => {
 					</ButtonClose>
 				</Link>
 				<PhotoStyled>
-					<img src={imageUrl} alt='full' />
+					{!imageUrl ? (
+						<CircularProgress />
+					) : (
+						<img src={imageUrl} alt='full' />
+					)}
 				</PhotoStyled>
 				<CommentsBlock>
 					{comments &&

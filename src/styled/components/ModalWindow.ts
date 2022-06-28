@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { colors, sizes } from "../vars";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import styled from 'styled-components';
+import { colors, sizes } from '../vars';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const Overlay = styled.div`
 	position: absolute;
@@ -16,8 +16,8 @@ const Overlay = styled.div`
 const Container = styled.div`
 	display: grid;
 	grid-template-areas:
-		"photo comments"
-		"form comments";
+		'photo comments'
+		'form comments';
 	grid-auto-columns: 1fr;
 	max-width: ${sizes.container};
 	background-color: ${colors.primaryWhite};
@@ -34,9 +34,9 @@ const Container = styled.div`
 	}
 	@media (max-width: 900px) {
 		grid-template-areas:
-			"photo"
-			"comments"
-			"form";
+			'photo'
+			'comments'
+			'form';
 		top: 0;
 		transform: translate(-50%, 0);
 		padding: 0;
@@ -60,13 +60,15 @@ const CommentsBlock = styled.div`
 	height: 550px;
 	overflow-y: auto;
 	margin-right: 30px;
-  @media (max-width: 900px) {
-    padding: 10px;
-    margin: 0;
-  }
+	@media (max-width: 900px) {
+		padding: 10px;
+		margin: 0;
+	}
 `;
 
 const PhotoStyled = styled.div`
+	width: 500px;
+  height: 350px;
 	grid-area: photo;
 	img {
 		width: 500px;
