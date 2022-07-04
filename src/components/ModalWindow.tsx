@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -7,18 +7,14 @@ import { validationSchema } from '../schemas';
 import {
 	Overlay,
 	Container,
-	Comment,
 	ButtonClose,
-	ButtonDelete,
-	ButtonEdit,
-	CommentsBlock,
 	PhotoStyled,
 } from '../styled/components/ModalWindow';
 import { BasicStateTypes, clearFullImage } from '../redux/reducer';
 import { sagaActions } from '../redux/sagaActions';
-import EditComment from './EditComment';
 import styled from 'styled-components';
 import { TextField, Button, CircularProgress } from '@mui/material';
+import Comments from './Comments';
 
 export const StyledForm = styled.div`
 	display: flex;
@@ -37,12 +33,10 @@ export const StyledTextField = styled.div`
 
 const ModalWindow = () => {
 	const { id: imageId } = useParams<{ id: string }>();
-	const { url: imageUrl, comments } = useSelector(
+	const { url: imageUrl } = useSelector(
 		(state: BasicStateTypes) => state.fullImage
 	);
 	const dispatch = useDispatch();
-	const [editModal, setEditModal] = useState(false);
-	const [commentData, setCommentData] = useState({});
 
 	React.useEffect(() => {
 		dispatch(clearFullImage());
@@ -51,14 +45,6 @@ const ModalWindow = () => {
 			payload: imageId,
 		});
 	}, [dispatch, imageId]);
-
-	const dateFormat = (timestamp: number) => {
-		const date = new Date(timestamp);
-		const day = date.getDate();
-		const month = date.getMonth() + 1;
-		const year = date.getFullYear();
-		return `${day}.${month}.${year}`;
-	};
 
 	const formik: any = useFormik({
 		initialValues: {
@@ -82,18 +68,6 @@ const ModalWindow = () => {
 		},
 	});
 
-	const deleteComment = (commentId: number) => {
-		dispatch({
-			type: sagaActions.DELETE_COMMENT,
-			payload: { commentId, imageId },
-		});
-	};
-
-	const openEditModal = (item: any) => {
-		setEditModal(true);
-		setCommentData(item);
-	};
-
 	return (
 		<Overlay>
 			<Container>
@@ -109,21 +83,7 @@ const ModalWindow = () => {
 						<img src={imageUrl} alt='full' />
 					)}
 				</PhotoStyled>
-				<CommentsBlock>
-					{comments &&
-						comments.map((item) => (
-							<Comment key={item.id} className='col'>
-								<p>{dateFormat(item.date)}</p>
-								<p>{item.text}</p>
-								<ButtonDelete
-									onClick={() => deleteComment(item.id)}
-								/>
-								<ButtonEdit
-									onClick={() => openEditModal(item)}
-								/>
-							</Comment>
-						))}
-				</CommentsBlock>
+				<Comments />
 				<StyledForm>
 					<StyledTextField>
 						<TextField
@@ -173,13 +133,6 @@ const ModalWindow = () => {
 						Submit
 					</Button>
 				</StyledForm>
-				{editModal && (
-					<EditComment
-						item={commentData}
-						imageId={imageId}
-						onClose={() => setEditModal(false)}
-					/>
-				)}
 			</Container>
 		</Overlay>
 	);
